@@ -1,27 +1,30 @@
 package com.srikanth.Sorting;
 
+import com.srikanth.util.Util;
+
 public class BubbleSort {
-	public int[] numbers;
+	public int numbers[];
 	public int size;
-	public BubbleSort(int[] numbers) {
-		this.numbers=numbers;
-		size=numbers.length;
-		
+
+	public BubbleSort(int[] a) {
+		super();
+		numbers = a;
+		size=numbers.length-1;
 	}
 	public void sort() {
-		
-		for(int i=size;i>0;i--){
-			for(int j=0;j<size-1;j++){
-				if(numbers[j]>numbers[j+1]){
-					int temp=numbers[j];
-					numbers[j]=numbers[j+1];
-					numbers[j+1]=temp;
+		for(int i=0;i<=size;i++){
+			for(int j=i+1;j<=size;j++){
+				if(numbers[i]>numbers[j]){
+					swap(i,j);
 				}
-				//Util.printArray(numbers);
 			}
 		}
-		System.out.println("After sorting:");
-		Util.printArray(numbers);
+		Util.printArray(numbers,"After Bubble sort");
+	}
+	private void swap(int i, int j) {
+		int temp=numbers[i];
+		numbers[i]=numbers[j];
+		numbers[j]=temp;
 	}
 
 }
