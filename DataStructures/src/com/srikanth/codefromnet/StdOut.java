@@ -1,4 +1,4 @@
-package com.srikanth.Searching.BinarySearchTree;
+package com.srikanth.codefromnet;
 /******************************************************************************
  *  Compilation:  javac StdOut.java
  *  Execution:    java StdOut

@@ -1,4 +1,4 @@
-package com.srikanth.Searching.BinarySearchTree;
+package com.srikanth.codefromnet;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 

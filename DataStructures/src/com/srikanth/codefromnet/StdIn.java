@@ -1,4 +1,4 @@
-package com.srikanth.Searching.BinarySearchTree;
+package com.srikanth.codefromnet;
 /******************************************************************************
  *  Compilation:  javac StdIn.java
  *  Execution:    java StdIn   (interactive test of basic functionality)
