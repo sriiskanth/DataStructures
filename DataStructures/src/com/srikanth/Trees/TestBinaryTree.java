@@ -43,14 +43,7 @@ public class TestBinaryTree {
 
 
 		 */
-		
-		btree.delete(45);
-		System.out.println();System.out.println();
-		btree.printTree();
-		//btree.delete(78);
-		//btree.printTree();
-		
-//		
+		btree.delete(78);
 		
 	}
 

@@ -176,67 +176,89 @@ public class BinarySearchTree {
 
 	public void delete(int key) {
 		// delete(root,key);
-		delete(find(root,key));
+		root = delete(root, key);
 	}
 
-	private Node delete(Node deleteNode) {
-		int key = deleteNode.getValue();
-		Node parentNode=parentNode(deleteNode.getValue());
-		if (deleteNode == null) {
-			System.out.println("Value Not present");
-			return null;
-		}
-		
-		if(deleteNode.getLeft()==null&&deleteNode.getRight()==null){
-			return deleteLeaf(deleteNode);
-		}
-		else if(deleteNode.getLeft()==null||deleteNode.getRight()==null){
-			Node singleChildNode=singleChildNode(deleteNode);
-			boolean isLeftParent=isLeftParent(parentNode,deleteNode);
-			if(!isLeftParent)
-				parentNode.setLeft(singleChildNode);
-			else
-				parentNode.setRight(singleChildNode);
-			return deleteNode;
+	private Node delete(Node node, int key) {
+		if (node == null)
+			return node;
+		if (key < node.getValue()) {
 			
+			node.setLeft(delete(node.getLeft(), key));
+			printSubtree(node);
+			//System.out.println("=============================");
+		} else if (key > node.getValue()) {
+			node.setRight(delete(node.getRight(), key));
+			printSubtree(node);
+		} else {
+			if (node.getLeft() == null)
+				return node.getRight();
+			else if (node.getRight() == null)
+				return node.getLeft();
+
+			int successor = successor(node.getValue());
+			node.setValue(successor);
+			node.setRight(delete(node.getRight(), node.getValue()));
+
 		}
-		else /*if(deleteNode.getLeft()!=null&&deleteNode.getRight()!=null)*/{
-			Node successor=find(successor(deleteNode.getValue()));
-			deleteNode.setValue(successor.getValue());
-			deleteNode.setRight(delete(successor));
-			return deleteNode;
-		}
-		
+		return node;
 	}
 
-	private boolean isLeftParent(Node parentNode,Node childNode) {
-		if(childNode.getValue()<parentNode.getValue())
+	// private Node delete(Node deleteNode) {
+	// int key = deleteNode.getValue();
+	// Node parentNode=parentNode(deleteNode.getValue());
+	// if (deleteNode == null) {
+	// System.out.println("Value Not present");
+	// return null;
+	// }
+	//
+	// if(deleteNode.getLeft()==null&&deleteNode.getRight()==null){
+	// return deleteLeaf(deleteNode);
+	// }
+	// else if(deleteNode.getLeft()==null||deleteNode.getRight()==null){
+	// Node singleChildNode=singleChildNode(deleteNode);
+	// boolean isLeftParent=isLeftParent(parentNode,deleteNode);
+	// if(!isLeftParent)
+	// parentNode.setLeft(singleChildNode);
+	// else
+	// parentNode.setRight(singleChildNode);
+	// return deleteNode;
+	//
+	// }
+	// else /*if(deleteNode.getLeft()!=null&&deleteNode.getRight()!=null)*/{
+	// Node successor=find(successor(deleteNode.getValue()));
+	// deleteNode.setValue(successor.getValue());
+	// deleteNode.setRight(delete(successor));
+	// return deleteNode;
+	// }
+	//
+	// }
+
+	private boolean isLeftParent(Node parentNode, Node childNode) {
+		if (childNode.getValue() < parentNode.getValue())
 			return false;
 		else
 			return true;
 	}
 
 	private Node singleChildNode(Node node) {
-		if(node.getLeft()!=null)
+		if (node.getLeft() != null)
 			return node.getLeft();
 		else
 			return node.getRight();
 	}
 
 	private Node deleteLeaf(Node leafNode) {
-		Node parentNode=parentNode(leafNode.getValue());
-		System.out.println("Parent :"+parentNode.getValue());
-		System.out.println("Leaf   :"+leafNode.getValue());
-		if(leafNode.getValue()<parentNode.getValue())
+		Node parentNode = parentNode(leafNode.getValue());
+		System.out.println("Parent :" + parentNode.getValue());
+		System.out.println("Leaf   :" + leafNode.getValue());
+		if (leafNode.getValue() < parentNode.getValue())
 			parentNode.setLeft(null);
 		else
 			parentNode.setRight(null);
-		System.out.println("Deleted Leaf Node	:	"+leafNode.getValue());
+		System.out.println("Deleted Leaf Node	:	" + leafNode.getValue());
 		return leafNode;
-		
-		
+
 	}
-
-
 
 }
