@@ -1,5 +1,12 @@
 package com.srikanth.Trees;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class BinarySearchTree {
 	private Node root;
 
@@ -204,6 +211,11 @@ public class BinarySearchTree {
 		return node;
 	}
 
+	public void levelOrderTraversal(){
+		//levelOrderTraversal(root);
+		System.out.println(levelOrder(root).toString());
+	}
+	
 	// private Node delete(Node deleteNode) {
 	// int key = deleteNode.getValue();
 	// Node parentNode=parentNode(deleteNode.getValue());
@@ -233,6 +245,76 @@ public class BinarySearchTree {
 	// }
 	//
 	// }
+
+	private void levelOrderTraversal(Node root) {
+		if(root==null)
+			return;
+		
+		Queue<Node> queue = new LinkedList<Node>();
+		queue.add(root);
+		while(!queue.isEmpty()){
+			Node current = queue.poll();
+	            System.out.print(current.getValue() + " ");
+	            /*Enqueue left child */
+	            if (current.getLeft() != null) {
+	                queue.add(current.getLeft());
+	            }else{
+	            	System.out.print(null + " ");
+	            }
+	 
+	            /*Enqueue right child */
+	            if (current.getRight() != null) {
+	                queue.add(current.getRight());
+	            }else{
+	            	System.out.print(null + " ");
+	            }
+		}
+		
+	}
+	
+	public List<List<Integer>> levelOrder(Node root) {
+	    List<List<Integer>> al = new ArrayList<List<Integer>>();
+	    List<Integer> nodeValues = new ArrayList<Integer>();
+	    if(root == null)
+	        return al;
+	 
+	    LinkedList<Node> current = new LinkedList<Node>();
+	    LinkedList<Node> next = new LinkedList<Node>();
+	    current.add(root);
+	 
+	    while(!current.isEmpty()){
+	        Node node = current.remove();
+	 
+	        if(node.getLeft() != null)
+	            next.add(node.getLeft());
+	        if(node.getRight() != null)
+	            next.add(node.getRight());
+	        
+	        
+	        //printLinkedList("Current	:",current);
+	        //printLinkedList("Next	:",next);
+	        nodeValues.add(node.getValue());
+	        
+	        if(current.isEmpty()){
+	            current = next;
+	            next = new LinkedList<Node>();
+	            al.add(nodeValues);
+	            nodeValues = new ArrayList();
+	        }
+	 
+	    }
+	    Collections.reverse(al);
+	    return al;
+	}
+
+	private void printLinkedList(String string, LinkedList<Node> node) {
+		System.out.print(string+"[");
+		for(Node n:node){
+			System.out.print(n.getValue()+" ");
+		}
+		System.out.print("]\n");
+		
+	}
 
 	private boolean isLeftParent(Node parentNode, Node childNode) {
 		if (childNode.getValue() < parentNode.getValue())

@@ -1,4 +1,4 @@
-package com.srikanth.InterviewQuestions;
+package com.srikanth.leetcode;
 
 
 /*
